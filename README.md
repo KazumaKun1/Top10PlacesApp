@@ -25,6 +25,13 @@ After selecting the branch, you can open the project by:
 - Find the __.Top10Places.xcodeproj__ file then open it
 Then in order to run the project you can simply press __ctrl + R__ on your keyboard to build and run.
 
+Upon opening the simulator, __make sure that you have set the location to custom location__ since it will only simulate that.
+
+To simulate location on a Simulator, 
+- select Features menu > Location, then select custom location.
+- You also set a predefined location in this.
+    - Select Debug menu > Simulate Location, then you will see a list of location options you can simulate.
+
 No need to do additional libraries installation since this project isn't dependent on any 3rd party libraries or package dependency such as Swift Package manager or Cocoapods.
     
 ## Features
