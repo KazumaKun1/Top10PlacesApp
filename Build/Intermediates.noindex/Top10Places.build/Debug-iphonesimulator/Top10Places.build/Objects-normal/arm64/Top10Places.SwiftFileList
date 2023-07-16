@@ -1,25 +1,25 @@
-/Users/opsolutions/Documents/Top10Places/Top10Places/Model/Core\ Data/Places+CoreDataProperties.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Model/Position.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Common/Extensions/Places+GetGroupedAnnotations.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Common/Extensions/Int+ordinalString.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Common/Extensions/CLLocationCoordinate2D+EquatableHashable.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Views/Customs/MapPinCallout.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Views/Customs/MapPinWithTitle.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Persistence.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Common/LocationManager.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Model/Core\ Data/Places+CoreDataClass.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Model/Address.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Views/Customs/GroupedPlacesListView.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Views/MainView.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Model/Rank.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Model/Core\ Data/UserLocation+CoreDataProperties.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Views/Customs/InfoAnnotation.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/ViewModel/RankingPlacesViewModel.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Model/Place.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Views/Customs/PlaceListView.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Views/Customs/StatusView.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Common/Enumerations/LocationRetrievalState.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Top10PlacesApp.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Views/Customs/CircularButton.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Model/Core\ Data/UserLocation+CoreDataClass.swift
-/Users/opsolutions/Documents/Top10Places/Top10Places/Common/MapService.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Core\ Data/Places+CoreDataProperties.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Position.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Common/Extensions/Places+GetGroupedAnnotations.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Common/Extensions/Int+ordinalString.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Common/Extensions/CLLocationCoordinate2D+EquatableHashable.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Views/Customs/MapPinCallout.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Views/Customs/MapPinWithTitle.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Persistence.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Common/LocationManager.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Core\ Data/Places+CoreDataClass.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Address.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Views/Customs/GroupedPlacesListView.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Views/MainView.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Rank.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Core\ Data/UserLocation+CoreDataProperties.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Views/Customs/InfoAnnotation.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/ViewModel/RankingPlacesViewModel.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Place.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Views/Customs/PlaceListView.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Views/Customs/StatusView.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Common/Enumerations/LocationRetrievalState.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Top10PlacesApp.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Views/Customs/CircularButton.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Core\ Data/UserLocation+CoreDataClass.swift
+/Users/opsolutions/Top10PlacesApp/Top10Places/Common/MapService.swift

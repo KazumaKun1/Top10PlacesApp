@@ -12,18 +12,6 @@
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
 		</data>
-		<key>PlugIns/Top10PlacesTests.xctest/Info.plist</key>
-		<data>
-		m+r7v4KcFOMQ2cLL//D0f5eD6yA=
-		</data>
-		<key>PlugIns/Top10PlacesTests.xctest/Top10PlacesTests</key>
-		<data>
-		oKplnSVRFIVcyxhX+99N48rPXlc=
-		</data>
-		<key>PlugIns/Top10PlacesTests.xctest/_CodeSignature/CodeResources</key>
-		<data>
-		JGuFCa0fHEn0J2jEA1uvDtqhAVo=
-		</data>
 		<key>Top10Places.momd/Top10Places.mom</key>
 		<data>
 		tMcBlrmmpdyG/AXBu66etjv/tEo=
@@ -39,27 +27,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>PlugIns/Top10PlacesTests.xctest/Info.plist</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			vRstZDPu32VYf4Ydtg94C6qdv9Nqz+X/JOlREkc8+Hw=
-			</data>
-		</dict>
-		<key>PlugIns/Top10PlacesTests.xctest/Top10PlacesTests</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			1ErbHJJwiucscAGLW8VQnuvx2h6j9Tqa/dmNIP2Tvzw=
-			</data>
-		</dict>
-		<key>PlugIns/Top10PlacesTests.xctest/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			WeJL3ciQbWxBJIgQia3C/k/OQ/36q5fJYkfQYHFBCsI=
-			</data>
-		</dict>
 		<key>Top10Places.momd/Top10Places.mom</key>
 		<dict>
 			<key>hash2</key>

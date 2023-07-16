@@ -1,0 +1,15 @@
+"/Users/opsolutions/Top10PlacesApp/Top10Places/ViewModel/RankingPlacesViewModel.swift":
+  swift-dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/RankingPlacesViewModel.swiftdeps"
+  object: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/RankingPlacesViewModel.o"
+  dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/RankingPlacesViewModel.d"
+  diagnostics: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/RankingPlacesViewModel.dia"
+"/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Place.swift":
+  swift-dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Place.swiftdeps"
+  diagnostics: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Place.dia"
+  object: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Place.o"
+  dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Place.d"
+"/Users/opsolutions/Top10PlacesApp/Top10Places/Views/Customs/PlaceListView.swift":
+  object: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/PlaceListView.o"
+  dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/PlaceListView.d"
+  diagnostics: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/PlaceListView.dia"
+  swift-dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/PlaceListView.swiftdeps"

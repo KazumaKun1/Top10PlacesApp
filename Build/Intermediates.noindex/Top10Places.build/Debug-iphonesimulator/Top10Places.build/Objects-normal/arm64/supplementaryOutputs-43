@@ -1,0 +1,15 @@
+"/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Core Data/Places+CoreDataClass.swift":
+  dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+CoreDataClass.d"
+  swift-dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+CoreDataClass.swiftdeps"
+  object: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+CoreDataClass.o"
+  diagnostics: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+CoreDataClass.dia"
+"/Users/opsolutions/Top10PlacesApp/Top10Places/Persistence.swift":
+  object: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Persistence.o"
+  swift-dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Persistence.swiftdeps"
+  dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Persistence.d"
+  diagnostics: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Persistence.dia"
+"/Users/opsolutions/Top10PlacesApp/Top10Places/Common/LocationManager.swift":
+  swift-dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/LocationManager.swiftdeps"
+  diagnostics: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/LocationManager.dia"
+  object: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/LocationManager.o"
+  dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/LocationManager.d"

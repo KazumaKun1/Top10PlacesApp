@@ -1,0 +1,15 @@
+"/Users/opsolutions/Top10PlacesApp/Top10Places/Model/Address.swift":
+  swift-dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Address.swiftdeps"
+  object: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Address.o"
+  diagnostics: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Address.dia"
+  dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Address.d"
+"/Users/opsolutions/Top10PlacesApp/Top10Places/Views/MainView.swift":
+  dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MainView.d"
+  object: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MainView.o"
+  diagnostics: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MainView.dia"
+  swift-dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MainView.swiftdeps"
+"/Users/opsolutions/Top10PlacesApp/Top10Places/Views/Customs/GroupedPlacesListView.swift":
+  dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/GroupedPlacesListView.d"
+  object: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/GroupedPlacesListView.o"
+  swift-dependencies: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/GroupedPlacesListView.swiftdeps"
+  diagnostics: "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/GroupedPlacesListView.dia"

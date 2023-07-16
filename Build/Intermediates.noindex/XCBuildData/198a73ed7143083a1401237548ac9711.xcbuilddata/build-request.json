@@ -1,0 +1,62 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "73444b20b44738e8cf4bf7a14923ae469a734401033a4827994c4732c96032c0"
+    }
+  ],
+  "containerPath" : "/Users/opsolutions/Top10PlacesApp/Top10Places.xcodeproj",
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator16.4",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "arm64",
+        "x86_64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/opsolutions/Top10PlacesApp/Build/Products",
+      "derivedDataPath" : "/Users/opsolutions/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/opsolutions/Library/Developer/Xcode/DerivedData/Top10Places-cbzfyaakmumhtpfkrircgvjxirzr/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/opsolutions/Library/Developer/Xcode/DerivedData/Top10Places-cbzfyaakmumhtpfkrircgvjxirzr/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/opsolutions/Top10PlacesApp/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPad14,1",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION" : "16.4",
+          "ASSETCATALOG_FILTER_FOR_THINNING_DEVICE_CONFIGURATION" : "iPad14,1",
+          "BUILD_ACTIVE_RESOURCES_ONLY" : "YES",
+          "ENABLE_PREVIEWS" : "NO",
+          "TARGET_DEVICE_IDENTIFIER" : "D8965718-CB1A-43C5-B35E-80C251C10175",
+          "TARGET_DEVICE_MODEL" : "iPad14,1",
+          "TARGET_DEVICE_OS_VERSION" : "16.4",
+          "TARGET_DEVICE_PLATFORM_NAME" : "iphonesimulator"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

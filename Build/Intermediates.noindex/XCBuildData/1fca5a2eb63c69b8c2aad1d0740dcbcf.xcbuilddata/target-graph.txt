@@ -1,4 +1,0 @@
-Target dependency graph (2 targets)
-Top10Places in Top10Places, no dependencies
-Top10PlacesTests in Top10Places, depends on:
-Top10Places in Top10Places (explicit)

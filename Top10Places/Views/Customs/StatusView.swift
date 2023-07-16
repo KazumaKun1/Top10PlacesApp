@@ -27,6 +27,7 @@ struct StatusView: View {
         HStack(spacing: 0) {
             Text("Status: ")
                 .font(.caption)
+                .foregroundColor(.black)
             if retrievalStatus != .ongoing {
                 Image(systemName: retrievalStatus.getIcon().iconName)
                     .resizable()
