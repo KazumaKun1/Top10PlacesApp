@@ -1,0 +1,15 @@
+"/Users/opsolutions/Documents/Top10Places/Top10PlacesTests/Mocks/MockPlaces.swift":
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/MockPlaces.d"
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/MockPlaces.dia"
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/MockPlaces.o"
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/MockPlaces.swiftdeps"
+"/Users/opsolutions/Documents/Top10Places/Top10Places/Common/LocationManager.swift":
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/LocationManager.swiftdeps"
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/LocationManager.o"
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/LocationManager.d"
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/LocationManager.dia"
+"/Users/opsolutions/Documents/Top10Places/Top10PlacesTests/Common/Extensions/CLLocationCoordinate2D+EquatableHashableTests.swift":
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/CLLocationCoordinate2D+EquatableHashableTests.swiftdeps"
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/CLLocationCoordinate2D+EquatableHashableTests.d"
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/CLLocationCoordinate2D+EquatableHashableTests.o"
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10PlacesTests.build/Objects-normal/arm64/CLLocationCoordinate2D+EquatableHashableTests.dia"

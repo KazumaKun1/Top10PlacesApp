@@ -1,0 +1,20 @@
+{
+  "source": "/Users/opsolutions/Documents/Top10Places/Top10Places/Views/Customs/PlaceListView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Top 10 places"
+      },
+      {
+        "comment": "",
+        "key": "%lld meters away from your location"
+      },
+      {
+        "comment": "",
+        "key": "%@"
+      }
+    ]
+  },
+  "version": 1
+}

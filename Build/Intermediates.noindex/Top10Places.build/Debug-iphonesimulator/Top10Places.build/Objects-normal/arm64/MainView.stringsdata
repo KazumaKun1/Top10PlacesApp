@@ -1,0 +1,20 @@
+{
+  "source": "/Users/opsolutions/Documents/Top10Places/Top10Places/Views/MainView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Location Permission Required"
+      },
+      {
+        "comment": "",
+        "key": "Open Settings"
+      },
+      {
+        "comment": "",
+        "key": "Please enable location permission for the app in your device settings in order for us to provide you the list of places."
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,20 @@
+"/Users/opsolutions/Documents/Top10Places/Top10Places/Common/Extensions/CLLocationCoordinate2D+EquatableHashable.swift":
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/CLLocationCoordinate2D+EquatableHashable.dia"
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/CLLocationCoordinate2D+EquatableHashable.swiftdeps"
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/CLLocationCoordinate2D+EquatableHashable.o"
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/CLLocationCoordinate2D+EquatableHashable.d"
+"/Users/opsolutions/Documents/Top10Places/Top10Places/Views/Customs/MapPinCallout.swift":
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MapPinCallout.d"
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MapPinCallout.dia"
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MapPinCallout.o"
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MapPinCallout.swiftdeps"
+"/Users/opsolutions/Documents/Top10Places/Top10Places/Views/Customs/MapPinWithTitle.swift":
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MapPinWithTitle.swiftdeps"
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MapPinWithTitle.dia"
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MapPinWithTitle.o"
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/MapPinWithTitle.d"
+"/Users/opsolutions/Documents/Top10Places/Top10Places/Persistence.swift":
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Persistence.o"
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Persistence.swiftdeps"
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Persistence.d"
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Persistence.dia"

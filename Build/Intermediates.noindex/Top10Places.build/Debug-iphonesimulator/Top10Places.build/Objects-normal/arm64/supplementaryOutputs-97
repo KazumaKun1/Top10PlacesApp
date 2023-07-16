@@ -1,0 +1,20 @@
+"/Users/opsolutions/Documents/Top10Places/Top10Places/Common/Extensions/Int+ordinalString.swift":
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Int+ordinalString.d"
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Int+ordinalString.o"
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Int+ordinalString.swiftdeps"
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Int+ordinalString.dia"
+"/Users/opsolutions/Documents/Top10Places/Top10Places/Model/Core Data/Places+CoreDataProperties.swift":
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+CoreDataProperties.dia"
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+CoreDataProperties.o"
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+CoreDataProperties.swiftdeps"
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+CoreDataProperties.d"
+"/Users/opsolutions/Documents/Top10Places/Top10Places/Model/Position.swift":
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Position.swiftdeps"
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Position.o"
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Position.d"
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Position.dia"
+"/Users/opsolutions/Documents/Top10Places/Top10Places/Common/Extensions/Places+GetGroupedAnnotations.swift":
+  dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+GetGroupedAnnotations.d"
+  swift-dependencies: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+GetGroupedAnnotations.swiftdeps"
+  object: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+GetGroupedAnnotations.o"
+  diagnostics: "/Users/opsolutions/Documents/Top10Places/Build/Intermediates.noindex/Top10Places.build/Debug-iphonesimulator/Top10Places.build/Objects-normal/arm64/Places+GetGroupedAnnotations.dia"
