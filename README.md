@@ -1,3 +1,5 @@
+Outdated code, will make changes to improve the coding for this as well as some vurnerabilities
+
 # Top 10 Places App
 
 An iOS Application that's provide you the top 10 places in your location. All of the places are sorted by distance within your current location.
