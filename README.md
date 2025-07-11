@@ -1,4 +1,4 @@
-Outdated code, will make changes to improve the coding for this as well as some vurnerabilities
+<h3> Outdated code, will make changes to improve the coding for this as well as some vurnerabilities to fix </h3>
 
 # Top 10 Places App
 
