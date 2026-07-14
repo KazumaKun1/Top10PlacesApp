@@ -31,8 +31,11 @@ class RankingPlacesViewModel: ObservableObject {
     //MARK: Published Places Variable
     @Published var places: [Place] = [Place]()
     
+    // TODO: - This will be adjusted once location manager has been refactored to use combine
+    @MainActor
     init() {
-        locationManager.delegate = self
+
+        //locationManager.delegate = self
     }
 }
 
@@ -82,20 +85,21 @@ extension RankingPlacesViewModel: LocationManagerDelegate {
      */
     
     func didGetUpdatedLocation(location: CLLocation) {
-        Task {
-            self.location = location
-            
-            if let preCachedPlaces = mapService.retrievePlacesData(from: location.coordinate.latitude, and: location.coordinate.longitude) {
-                places = preCachedPlaces
-                retrievalStatus = .precached
-            } else {
-                await retrievePlaces()
-            }
-            
-            setGroupedPlacesIfNeeded()
-            
-            goToCurrentLocation()
-        }
+        // TODO: - Fix an issue here with the data race condition for sending
+//        Task {
+//            self.location = location
+//            
+//            if let preCachedPlaces = mapService.retrievePlacesData(from: location.coordinate.latitude, and: location.coordinate.longitude) {
+//                places = preCachedPlaces
+//                retrievalStatus = .precached
+//            } else {
+//                await retrievePlaces()
+//            }
+//            
+//            setGroupedPlacesIfNeeded()
+//            
+//            goToCurrentLocation()
+//        }
     }
     
     /**
@@ -314,23 +318,24 @@ extension RankingPlacesViewModel {
      
      */
     func refreshPlaces() {
-        Task {
-            retrievalStatus = .ongoing
-            
-            await retrievePlaces()
-            
-            if retrievalStatus == .failure {
-                if let location = self.location,
-                    let preCachedPlaces = mapService.retrievePlacesData(from: location.coordinate.latitude, and: location.coordinate.longitude) {
-                    places = preCachedPlaces
-                    retrievalStatus = .precached
-                    setGroupedPlacesIfNeeded()
-                }
-            } else {
-                setGroupedPlacesIfNeeded()
-            }
-            
-            goToCurrentLocation()
-        }
+        // TODO: - Fix an issue here with the data race condition for sending
+//        Task {
+//            retrievalStatus = .ongoing
+//            
+//            await retrievePlaces()
+//            
+//            if retrievalStatus == .failure {
+//                if let location = self.location,
+//                    let preCachedPlaces = mapService.retrievePlacesData(from: location.coordinate.latitude, and: location.coordinate.longitude) {
+//                    places = preCachedPlaces
+//                    retrievalStatus = .precached
+//                    setGroupedPlacesIfNeeded()
+//                }
+//            } else {
+//                setGroupedPlacesIfNeeded()
+//            }
+//            
+//            goToCurrentLocation()
+//        }
     }
 }
