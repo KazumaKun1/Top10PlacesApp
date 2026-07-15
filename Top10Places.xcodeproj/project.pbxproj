@@ -60,6 +60,12 @@
 		5B92DADA2A5EF0F100BFE50C /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B92DAD92A5EF0F100BFE50C /* MapService.swift */; };
 		5BB95EDD2A5F998F009BA8B4 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB95EDC2A5F998F009BA8B4 /* Address.swift */; };
 		5BB95EDF2A5F9996009BA8B4 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB95EDE2A5F9996009BA8B4 /* Position.swift */; };
+		CCAA36F530067D8A006BF2C4 /* Place+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA36F430067D86006BF2C4 /* Place+Extensions.swift */; };
+		CCAA36F630067D8A006BF2C4 /* Place+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA36F430067D86006BF2C4 /* Place+Extensions.swift */; };
+		CCAA36FF300694BC006BF2C4 /* Future+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA36FE300694B7006BF2C4 /* Future+Extensions.swift */; };
+		CCAA3700300694BC006BF2C4 /* Future+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA36FE300694B7006BF2C4 /* Future+Extensions.swift */; };
+		CCAA3702300694E2006BF2C4 /* MapkitPlaceSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA3701300694DC006BF2C4 /* MapkitPlaceSearcher.swift */; };
+		CCAA3703300694E2006BF2C4 /* MapkitPlaceSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA3701300694DC006BF2C4 /* MapkitPlaceSearcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +118,9 @@
 		5B92DAD92A5EF0F100BFE50C /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		5BB95EDC2A5F998F009BA8B4 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		5BB95EDE2A5F9996009BA8B4 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		CCAA36F430067D86006BF2C4 /* Place+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place+Extensions.swift"; sourceTree = "<group>"; };
+		CCAA36FE300694B7006BF2C4 /* Future+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Future+Extensions.swift"; sourceTree = "<group>"; };
+		CCAA3701300694DC006BF2C4 /* MapkitPlaceSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapkitPlaceSearcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,11 +315,30 @@
 		5B92DAD82A5EC80300BFE50C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CCAA36FE300694B7006BF2C4 /* Future+Extensions.swift */,
+				CCAA36F230067D7C006BF2C4 /* Model */,
 				5B613F122A60119C00053A37 /* Int+ordinalString.swift */,
 				5B67DBA22A617CDD00D06950 /* CLLocationCoordinate2D+EquatableHashable.swift */,
 				5B1B71902A62627C008DEEDA /* Places+GetGroupedAnnotations.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CCAA36F230067D7C006BF2C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CCAA3701300694DC006BF2C4 /* MapkitPlaceSearcher.swift */,
+				CCAA36F330067D83006BF2C4 /* Place */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CCAA36F330067D83006BF2C4 /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				CCAA36F430067D86006BF2C4 /* Place+Extensions.swift */,
+			);
+			path = Place;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,6 +449,7 @@
 				5B6961902A6405EE009E23F2 /* Places+CoreDataProperties.swift in Sources */,
 				5B69617E2A63E9B7009E23F2 /* LocationManager.swift in Sources */,
 				5B6961762A63E05A009E23F2 /* Places+GetGroupedAnnotationsTests.swift in Sources */,
+				CCAA3700300694BC006BF2C4 /* Future+Extensions.swift in Sources */,
 				5B69617D2A63E9A1009E23F2 /* MockLocationManager.swift in Sources */,
 				5B6961822A63F62F009E23F2 /* LocationManagerTests.swift in Sources */,
 				5B69618B2A640120009E23F2 /* RankingPlacesViewModel.swift in Sources */,
@@ -432,10 +461,12 @@
 				5B69616A2A63D83D009E23F2 /* Int+ordinalString.swift in Sources */,
 				5B69616B2A63D995009E23F2 /* CLLocationCoordinate2D+EquatableHashable.swift in Sources */,
 				5B6961702A63DBFB009E23F2 /* Place.swift in Sources */,
+				CCAA3703300694E2006BF2C4 /* MapkitPlaceSearcher.swift in Sources */,
 				5B6961912A64060A009E23F2 /* Persistence.swift in Sources */,
 				5B6961712A63DBFE009E23F2 /* Address.swift in Sources */,
 				5B69618A2A64011C009E23F2 /* RankingPlacesViewModelTests.swift in Sources */,
 				5B6961602A63D73D009E23F2 /* Top10PlacesTests.swift in Sources */,
+				CCAA36F630067D8A006BF2C4 /* Place+Extensions.swift in Sources */,
 				5B6961722A63DC00009E23F2 /* Position.swift in Sources */,
 				5B69618E2A6405E9009E23F2 /* UserLocation+CoreDataProperties.swift in Sources */,
 			);
@@ -447,8 +478,10 @@
 			files = (
 				5B6961532A6376CF009E23F2 /* Places+CoreDataProperties.swift in Sources */,
 				5BB95EDF2A5F9996009BA8B4 /* Position.swift in Sources */,
+				CCAA36F530067D8A006BF2C4 /* Place+Extensions.swift in Sources */,
 				5B1B71912A62627C008DEEDA /* Places+GetGroupedAnnotations.swift in Sources */,
 				5B613F132A60119C00053A37 /* Int+ordinalString.swift in Sources */,
+				CCAA3702300694E2006BF2C4 /* MapkitPlaceSearcher.swift in Sources */,
 				5B67DBA32A617CDD00D06950 /* CLLocationCoordinate2D+EquatableHashable.swift in Sources */,
 				5B92DAC62A5EBCA000BFE50C /* Top10Places.xcdatamodeld in Sources */,
 				5B613F172A601CE500053A37 /* MapPinCallout.swift in Sources */,
@@ -456,6 +489,7 @@
 				5B92DAC32A5EBCA000BFE50C /* Persistence.swift in Sources */,
 				5B92DAD32A5EC5FA00BFE50C /* LocationManager.swift in Sources */,
 				5B6961522A6376CF009E23F2 /* Places+CoreDataClass.swift in Sources */,
+				CCAA36FF300694BC006BF2C4 /* Future+Extensions.swift in Sources */,
 				5BB95EDD2A5F998F009BA8B4 /* Address.swift in Sources */,
 				5B1B71932A6271E1008DEEDA /* GroupedPlacesListView.swift in Sources */,
 				5B92DACD2A5EBD6100BFE50C /* MainView.swift in Sources */,
@@ -571,7 +605,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -628,7 +662,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -647,6 +681,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Top10Places/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To enhance your experience, this app requires access to your location, we can provide you the top 10 closest places in your area. Rest assured that we prioritize your privacy and securely handle your location data.";
@@ -656,7 +691,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -678,6 +713,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Top10Places/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To enhance your experience, this app requires access to your location, we can provide you the top 10 closest places in your area. Rest assured that we prioritize your privacy and securely handle your location data.";
@@ -687,7 +723,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
