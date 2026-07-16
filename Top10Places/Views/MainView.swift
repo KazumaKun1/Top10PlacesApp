@@ -88,7 +88,8 @@ struct MainView: View {
                 //MARK: Refresh Button
                 CircularButton(retrievalStatus: $viewModel.retrievalStatus, imageName: "arrow.clockwise") {
                     withAnimation {
-                        viewModel.refreshPlaces()
+                        // TODO: - Refine this to be use in the view
+                        //viewModel.refreshPlaces()
                         
                         if showPlaceListPopup {
                             showPlaceListPopup = false

@@ -22,15 +22,6 @@ enum LocationAnnotationType {
     case hidden
 }
 
-/**
- This is a model that is used for representing one single annotation to the map and it used as a part of the logic to transform the places data into array of places.
- 
- ```
- let place = Place(id: "1", title: "Mall", distance: 33, position: Position(lat: 10, lng: 10, coordinate: CLLocation(latitude: 10, longitude: 10)), address: Address(label: "Mall philippines"), rank: Rank(ordinal: "1st", rawValue: 1), annotationType: .hidden)
- ```
- 
- */
-
 struct Place: Identifiable, Decodable, Equatable {
     static func == (lhs: Place, rhs: Place) -> Bool {
         lhs.id == rhs.id
