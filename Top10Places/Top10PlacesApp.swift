@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct Top10PlacesApp: App {
-    let persistenceController = PersistenceController.shared
+    @StateObject var viewModel = RankingPlacesViewModel(mapService: MapService())
     
     var body: some Scene {
         WindowGroup {
-            MainView(viewModel: RankingPlacesViewModel(mapService: MapService()))
+            MainView(viewModel: viewModel)
         }
     }
 }
