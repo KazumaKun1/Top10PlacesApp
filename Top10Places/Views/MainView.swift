@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct MainView: View {
-    @ObservedObject var viewModel = RankingPlacesViewModel()
+    @ObservedObject var viewModel: RankingPlacesViewModel
     
     @State var showNeedsPermissionAlert = false
     @State var showPinInfoPopup = false
@@ -88,7 +88,8 @@ struct MainView: View {
                 //MARK: Refresh Button
                 CircularButton(retrievalStatus: $viewModel.retrievalStatus, imageName: "arrow.clockwise") {
                     withAnimation {
-                        viewModel.refreshPlaces()
+                        // TODO: - Refine this to be use in the view
+                        //viewModel.refreshPlaces()
                         
                         if showPlaceListPopup {
                             showPlaceListPopup = false
@@ -165,11 +166,5 @@ struct MainView: View {
         } message: {
             Text("Please enable location permission for the app in your device settings in order for us to provide you the list of places.")
         }
-    }
-}
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
     }
 }

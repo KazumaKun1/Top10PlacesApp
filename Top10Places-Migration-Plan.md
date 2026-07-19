@@ -1,6 +1,6 @@
 # Top 10 Places — Migration Plan
 
-Target: iOS 26+, Xcode 26, Combine (not `@Observable`), Coordinator pattern for navigation, SwiftData, Swift Testing.
+Target: iOS 26+, Xcode 26, Combine (not `@Observable`), Coordinator pattern for navigation, Swift Testing. No persistence layer (see Phase 4).
 
 **Deployment target note:** originally planned as iOS 18+ to preserve back-compat. Revised to iOS 26+ — this is a personal practice/portfolio rewrite with no real install base to protect, and targeting iOS 26 directly avoids writing around now-deprecated MapKit APIs (see Phase 1) instead of just using their replacements. Trade-off, for the record: iOS 26+ as a minimum means only devices that can run iOS 26 can install the app at all — a materially larger cut than the Foundation Models feature's own A17 Pro/M1 hardware requirement (Phase 7), which is a separate, narrower gate on top of this.
 
@@ -48,7 +48,7 @@ extension Future where Failure == Error {
 }
 ```
 
-**2. A stateless, naturally-`Sendable` searcher**, separated out of `MapService` specifically so the search logic never needs to capture `self` (which holds non-Sendable Core Data state) across the `@Sendable` boundary:
+**2. A stateless, naturally-`Sendable` searcher**, separated out of `MapService` specifically so the search logic never needs to capture `self` across the `@Sendable` boundary — matters regardless of what `MapService` ends up holding, since any non-Sendable state on the class would trip the same error:
 
 ```swift
 struct MapKitPlaceSearcher: Sendable {
@@ -75,7 +75,6 @@ struct MapKitPlaceSearcher: Sendable {
 ```swift
 class MapService: MapServiceProtocol {
     private let searcher = MapKitPlaceSearcher()
-    private let persistenceController = PersistenceController.shared
 
     func getPlaces(near coordinate: CLLocationCoordinate2D) -> AnyPublisher<[Place], Error> {
         let searcher = self.searcher
@@ -115,7 +114,7 @@ extension Place {
 **Concurrency debugging notes (what didn't work, for future reference):**
 - Wrapping `MKLocalSearch.start(completionHandler:)` (the old completion-handler API, not the `async throws` one) inside `Future`'s `promise` closure fails with `Sending 'promise' risks causing data races` — the completion handler is `@Sendable`, and Combine's `Future.Promise` isn't, so capturing `promise` across that boundary is rejected. Fix was switching to the `async throws` `start()` variant entirely, removing the completion-handler closure from the picture.
 - Wrapping that `await` call in a bare `Task { }` inside `Future`'s closure still fails with `Passing closure as a 'sending' parameter risks causing data races...` — same root cause, `promise` is still a non-`Sendable` value crossing into `Task.init`'s `sending` closure parameter. Fix: `nonisolated(unsafe) let promise = promise`, declared once inside the reusable `Future(operation:)` extension so the workaround lives in one place — legitimate here since Combine's `Future` is documented as safe to fulfill from any thread/queue.
-- Capturing `self` (i.e. `MapService`) inside the `@Sendable operation` closure fails with `Capture of 'self' with non-Sendable type 'MapService' in a '@Sendable' closure`, since `MapService` holds Core Data state that isn't Sendable. Fix: extract the search logic into its own stateless `Sendable` struct (`MapKitPlaceSearcher`) instead of keeping it on `MapService` itself.
+- Capturing `self` (i.e. `MapService`) inside the `@Sendable operation` closure fails with `Capture of 'self' with non-Sendable type 'MapService' in a '@Sendable' closure`, since a plain class isn't `Sendable` by default. Fix: extract the search logic into its own stateless `Sendable` struct (`MapKitPlaceSearcher`) instead of keeping it on `MapService` itself.
 - Referencing `searcher` (a stored property) bare inside the closure fails separately with `Reference to property 'searcher' in closure requires explicit use of 'self'` — an older, unrelated "implicit self in closures" rule, not a concurrency error. Fixed by capturing `searcher` into a local `let` before the closures.
 - Marking `MapService`/`MapServiceProtocol` as `@MainActor` was tried as a fix and made things worse, not better — it doesn't address the Sendable-crossing rule at all, and this project doesn't have default main-actor isolation set (`SWIFT_DEFAULT_ACTOR_ISOLATION` isn't configured), so nothing is implicitly `@MainActor` here regardless.
 
@@ -135,24 +134,47 @@ Replace the delegate-driven `didGetUpdatedLocation` flow with a subscription cha
 ```swift
 locationManager.locationPublisher
     .removeDuplicates()
+    .handleEvents(receiveOutput: { [weak self] location in
+        self?.location = location
+        self?.retrievalStatus = .ongoing
+    })
     .flatMap { [mapService] location in
-        mapService.searchPlaces(near: location.coordinate)
-            .catch { _ in Just([]) }
+        mapService.getPlaces(near: location.coordinate)
+            .map { (LocationRetrievalState.success, $0) }
+            .catch { _ in Just((LocationRetrievalState.failure, [])) }
     }
     .receive(on: DispatchQueue.main)
-    .assign(to: &$places)
+    .sink { [weak self] status, places in
+        guard let self else { return }
+        self.retrievalStatus = status
+        self.places = /* existing grouped-annotation logic */
+        self.goToCurrentLocation()
+    }
+    .store(in: &cancellables)
 ```
 
-Depends on Phases 1 and 2.
+Depends on Phases 1 and 2. (See "Phase 3 review notes" below — the first working pass on the `migration/phase-3` branch got the pipeline shape right but missed wiring `location` and `retrievalStatus` through; the sketch above is the corrected version.)
 
-## Phase 4 — Core Data → SwiftData
+**Phase 3 review notes (from reviewing the actual `migration/phase-3` branch):**
+- `retrievalStatus` never reached `.success` in the first pass — the places `.sink` updated `places` but not `retrievalStatus`, so the status icon stayed stuck on "ongoing" after every successful load. Fixed above by carrying `(status, places)` through the pipeline together.
+- `location` was never assigned anywhere after dropping the old delegate method, which silently broke `goToCurrentLocation()` (checks `if let location = self.location`) — the current-location button did nothing, and the map never left the hardcoded default region. Fixed above via `.handleEvents(receiveOutput:)` on the location publisher.
+- Errors from `getPlaces` were swallowed by `.catch { _ in Just([]) }` into an empty array with no status change — indistinguishable from "zero results nearby." Fixed by mapping the catch to `.failure` explicitly instead of just an empty array.
+- `refreshPlaces()` and the dead `didGetUpdatedLocation(location:)` stub were left commented out on that branch — still open, not addressed by the sketch above. `refreshPlaces()` needs its own small design: likely a `PassthroughSubject<Void, Never>` merged with `locationPublisher` via `Publishers.Merge`, re-emitting the last known location on demand.
+- `permissionDeniedPublisher` (in `LocationManager`) only ever sends `true`, never resets to `false` on successful re-authorization — minor, but means `showNeedsPermissionAlert` won't clear itself if a user grants permission in Settings and returns to the app.
 
-Current model is trivial: two entities (`Places`, `UserLocation`), one relationship, no migration history, no `NSFetchedResultsController` in the UI — this should be a clean, low-risk migration.
+## Phase 4 — Remove Core Data, no replacement
 
-- `NSManagedObject` subclasses → `@Model` classes.
-- `NSPersistentContainer` (`Persistence.swift`) → `ModelContainer`, wired via `.modelContainer(for:)` on `WindowGroup`.
-- `NSFetchRequest` + `NSPredicate` (in `MapService`) → `FetchDescriptor` + `#Predicate`.
-- **Worth doing at the same time (optional but recommended):** stop storing places as a raw JSON blob (`Places.json`) that gets re-decoded on every read. Since `Place` is already `Codable` with clean fields, model it as its own `@Model` keyed by lat/long instead. Removes a serialize/deserialize layer and gets real predicates instead of string-matching into a blob. Natural to do while already touching `MapService` for Phase 1.
+Decided against migrating to SwiftData (tracked as a separate practice project instead — see note below). The original justification for a persistence layer no longer applies: Core Data existed to cache HERE API responses because HERE was a paid, rate-limited third-party API. `MKLocalSearch` (Phase 1) requires no API key and no per-request billing — it may still throttle or slow down under heavy load, but that's not a concern given this app's request volume, so the problem the cache solved doesn't exist anymore. Confirmed by inspection: as of Phase 1, `MapService.getPlaces` already never calls `saveRetrievedPlaces` — the caching path organically went dead the moment HERE was removed, without anything breaking.
+
+**Caveat kept for the record:** `MKLocalSearch` still requires network access — it's not an offline API — so this does mean losing the "show last-known results when offline" behavior the original README listed as a feature. If that's wanted later, the right-sized fix is an in-memory (or `UserDefaults`) cache of the last successful `[Place]` array, not a full persistent store with entities/relationships. Not planned for now — revisit only if offline behavior becomes an actual complaint, not preemptively.
+
+**Cleanup scope:**
+- Delete `Persistence.swift`, `Top10Places.xcdatamodeld`, `Places+CoreDataClass.swift`, `Places+CoreDataProperties.swift`, `UserLocation+CoreDataClass.swift`, `UserLocation+CoreDataProperties.swift`.
+- Delete the now-dead `getPlacesObject`, `saveRetrievedPlaces`, `retrievePlacesData` methods from `MapService` (unused since Phase 1).
+- Remove `import CoreData` from `MapService.swift` and `Top10PlacesApp.swift`; remove `PersistenceController.shared` from the app entry point.
+- Update `Top10PlacesTests` — any Core Data-dependent test setup (in-memory store, etc.) gets deleted, not migrated.
+
+**Not a SwiftData migration.** SwiftData is being practiced separately on another project — kept out of scope here entirely rather than folded in as a "might as well" addition, since this app no longer has a real need for a persistence layer of any kind.
 
 ## Phase 5 — AppCoordinator + Map API modernization
 
@@ -194,7 +216,9 @@ Independent of the other phases — can move first or last.
 
 ## Suggested order
 
-Phase 0 → Phase 6 (tests, doesn't block anything) → Phase 4 (SwiftData) → Phase 1 + Phase 2 (networking + location, no dependencies on each other) → Phase 3 (ViewModel, depends on 1+2) → Phase 5 (Coordinator + Map API, depends on 3).
+Phase 0 → Phase 6 (tests, doesn't block anything) → Phase 1 + Phase 2 (networking + location, no dependencies on each other) → Phase 4 (Core Data removal, safe once Phase 1 confirms nothing else calls the caching methods) → Phase 3 (ViewModel, depends on 1+2) → Phase 5 (Coordinator + Map API, depends on 3).
+
+Actual progress so far: Phase 0 and Phase 1 are merged to `main`; Phase 3 on the `migration/phase-3` branch now correctly assigns `location`, propagates success/failure `retrievalStatus`, and maps `getPlaces` errors to `.failure` instead of swallowing them — the remaining open gaps are `refreshPlaces()` (still unimplemented) and the permission-denied flag never resetting to `false` on re-authorization; Phase 4 is newly re-scoped (removal, not SwiftData) and not yet started.
 
 ## Deferred: category filter + text search (post-migration)
 

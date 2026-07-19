@@ -8,16 +8,13 @@
 import Foundation
 import MapKit
 import SwiftUI
+import Combine
 
-/**
- A view model that's used for the 'MainView'. It contains the functions and published data that's used for presenting places in the maps as well as the delegate from the 'LocationManager'
- 
- */
-
+@MainActor
 class RankingPlacesViewModel: ObservableObject {
     @ObservedObject private var locationManager = LocationManager()
     
-    private let mapService = MapService()
+    private let mapService: MapServiceProtocol
     
     //MARK: Bool Alert Variable
     @Published var showNeedsPermissionAlert = false
@@ -28,100 +25,60 @@ class RankingPlacesViewModel: ObservableObject {
     
     @Published var retrievalStatus: LocationRetrievalState = .ongoing
     
-    //MARK: Published Places Variable
+    // - MARK: Published Places Variable
     @Published var places: [Place] = [Place]()
     
-    // TODO: - This will be adjusted once location manager has been refactored to use combine
-    @MainActor
-    init() {
-
-        //locationManager.delegate = self
+    var cancellables = Set<AnyCancellable>()
+    
+    init(mapService: MapServiceProtocol) {
+        self.mapService = mapService
+        
+        locationManager.permissionDeniedPublisher
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$showNeedsPermissionAlert)
+        
+        locationManager.locationPublisher
+            .removeDuplicates()
+            .handleEvents(receiveOutput: { [weak self] location in
+                guard let self else { return }
+                self.location = location
+                self.retrievalStatus = .ongoing
+            })
+            .map { [mapService] location in
+                mapService.getPlaces(near: location.coordinate)
+                    .map { (LocationRetrievalState.success, $0) }
+                    .catch { _ in Just((LocationRetrievalState.failure, [])) }
+            }
+            .switchToLatest()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status, places in
+                guard let self else { return }
+                
+                self.retrievalStatus = status
+                
+                self.places = getGroupAnnotation(places: places)
+                
+                self.goToCurrentLocation()
+            }
+            .store(in: &cancellables)
+        
+        locationManager.errorPublisher
+            .sink { [weak self] locationError in
+                guard let self else { return }
+                switch locationError {
+                case .networkFailure, .denied:
+                    self.retrievalStatus = .failure
+                case .unknown, .noLocationFound:
+                    self.retrievalStatus = .unknown
+                }
+            }
+            .store(in: &cancellables)
     }
 }
 
-//MARK: Map Delegates
-extension RankingPlacesViewModel: LocationManagerDelegate {
-    func didAuthenticationSuccessful() {
-        showNeedsPermissionAlert = false
-    }
-    
-    func didAuthenticationFailure() {
-        //Present the alert only if the app already been launched more than one to prevent conflict of displaying the permissions alert
-        if isAppAlreadyLaunchedOnce() {
-            showNeedsPermissionAlert = true
-        }
-        
-        retrievalStatus = .unknown
-    }
-    
-    /**
-     This function is used to check if the app is already been launched. It's used for preventing the permission alert to be displayed for the first time when the device asked for location.
-     
-     ```
-         if isAppAlreadyLaunchedOnce() {
-             showNeedsPermissionAlert = true
-         }
-     ```
-     
-     - returns: A boolean variable to check if the app is already been launched.
-     
-     */
-    
-    func isAppAlreadyLaunchedOnce() -> Bool {
-        if UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce") {
-            return true
-        }
-        
-        UserDefaults.standard.set(true, forKey: "isAppAlreadyLaunchedOnce")
-        
-        return false
-    }
-    
-    /**
-     This is where the processing of places happens after retrieving the location from LocationManager. It will check first if the location is stored on the core data.
-     If it does, it will retrieve the location object as well as the places object since location has a one to one relationship with the places.
-     Otherwise, it will retrieve the places data from the API then store it in the core data.
-     
-     */
-    
-    func didGetUpdatedLocation(location: CLLocation) {
-        // TODO: - Fix an issue here with the data race condition for sending
-//        Task {
-//            self.location = location
-//            
-//            if let preCachedPlaces = mapService.retrievePlacesData(from: location.coordinate.latitude, and: location.coordinate.longitude) {
-//                places = preCachedPlaces
-//                retrievalStatus = .precached
-//            } else {
-//                await retrievePlaces()
-//            }
-//            
-//            setGroupedPlacesIfNeeded()
-//            
-//            goToCurrentLocation()
-//        }
-    }
-    
-    /**
-     This is used for configuring the places array to set type of annotation to present in the map. if there are no places that have the same coordinates, it will set as '.single'. Otherwise, it will set the first element of the places that have the same coordinates as '.grouped' then the rest will be '.hidden' to avoid stacking of annotations in the map.
-     
-     ```
-         Task {
-             self.location = location
-             
-             await retrievePlaces()
-             
-             setGroupedPlacesIfNeeded()
-             
-             goToCurrentLocation()
-         }
-     ```
-     
-     - warning: This function should only be called if there are elements in the places
-     
-     */
-    
-    func setGroupedPlacesIfNeeded() {
+//MARK: Other Map Function
+extension RankingPlacesViewModel {
+    func getGroupAnnotation(places: [Place]) -> [Place] {
         var modifiedPlaces = [Place]()
         
         for place in places {
@@ -141,82 +98,9 @@ extension RankingPlacesViewModel: LocationManagerDelegate {
             }
         }
         
-        self.places = modifiedPlaces
+        return modifiedPlaces
     }
     
-    /**
-     It sets the places variable if the 'getPlacesFrom' function returns an array as well as the status of the retrieval to be used for displaying the approariate icon to the user. Otherwise, it will set as an empty array and changed it to '.failture'.
-     
-     ```
-         Task {
-             retrievalStatus = .ongoing
-             
-             await retrievePlaces()
-         }
-     ```
-     
-     - warning: This function is asynchronous and it's suggested that to encase it in a task block.
-     
-     */
-    
-    private func retrievePlaces() async {
-        if let location = self.location,
-            let places = await getPlacesFrom(location: location) {
-            self.places = places
-            retrievalStatus = .success
-        } else {
-            self.places = [Place]()
-            retrievalStatus = .failure
-        }
-    }
-    
-    /**
-     It returns an array of places asynchronously via an API based on the coordinates of the user.
-     
-     ```
-         if let location = self.location,
-             let places = await getPlacesFrom(location: location) {
-             self.places = places
-             retrievalStatus = .success
-         } else {
-             self.places = [Place]()
-             retrievalStatus = .failure
-         }
-     ```
-     
-     - parameter location: test.
-     - returns: An optional array of places
-     - warning: This function is asynchronous and it's suggested that to encase it in a task block.
-     
-     */
-    
-    private func getPlacesFrom(location: CLLocation) async -> [Place]? {
-        return await mapService.getPlacesFrom(latitude: location.coordinate.latitude, longtitude: location.coordinate.longitude)
-    }
-    
-    func didFailGettingLocation() {
-        retrievalStatus = .unknown
-    }
-}
-
-//MARK: Other Map Function
-extension RankingPlacesViewModel {
-    /**
-     This will change the region of the map to focus on a specific place in the map.
-     
-     ```
-         MapPinWithTitle(place: place, action: {
-             withAnimation {
-                 viewModel.goToPlaceAnnotation(place: place.wrappedValue)
-                 selectedPlace = place.wrappedValue
-             }
-         })
-     ```
-     
-     - parameter place: A place object retrieved from a selected annotation from the map..
-     - warning: Region variable is @Published which means that it will update the view.
-     
-     */
     func goToPlaceAnnotation(place: Place) {
         let center = place.position.coordinate
         let span = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
@@ -224,24 +108,6 @@ extension RankingPlacesViewModel {
         self.region = MKCoordinateRegion(center: center, span: span)
     }
     
-    /**
-     This will change the region of the map to focus on the user's current location
-     
-     ```
-         Task {
-             self.location = location
-             
-             await retrievePlaces()
-             
-             setGroupedPlacesIfNeeded()
-             
-             goToCurrentLocation()
-         }
-     ```
-     
-     - warning: Region variable is @Published which means that it will update the view.
-     
-     */
     func goToCurrentLocation() {
         if let location = self.location {
             let regionCoverageInfo = getProperZoomOnMapWith(location: location)
@@ -250,21 +116,6 @@ extension RankingPlacesViewModel {
         }
     }
     
-    /**
-     The purpose of this function is to properly show all of the places including the user's location in the map for the user able to see.
-     
-     ```
-         if let location = self.location {
-             let regionCoverageInfo = getProperZoomOnMapWith(location: location)
-             
-             self.region = MKCoordinateRegion(center: regionCoverageInfo.center, span: regionCoverageInfo.span)
-         }
-     ```
-     
-     - parameter location: The location from either a specific point of the map, the user's current location or a specific place.
-     - returns: A tuple that returns the parameters needed to create an 'MKCoordinateRegion'. The center represents the coordinates where in the map will focus and the span represents the zoom level of the map if it's zoom in or out. For this case, it will return the proper values based on the places coordinates and the user's location.
-     
-     */
     private func getProperZoomOnMapWith(location: CLLocation) -> (center: CLLocationCoordinate2D, span: MKCoordinateSpan) {
         var span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         var center = location.coordinate
@@ -295,47 +146,5 @@ extension RankingPlacesViewModel {
         }
         
         return (center: center, span: span)
-    }
-    
-    /**
-     This will retrieve the places data from the API again and set the retrieval status to '.ongoing' for properly displaying of icon. This is used for the refresh button in 'MainView'.
-     This will also update the json attribute of places entity from core data.
-     
-     ```
-         CircularButton(retrievalStatus: $viewModel.retrievalStatus, imageName: "arrow.clockwise") {
-             withAnimation {
-                 viewModel.refreshPlaces()
-                 
-                 if showPlaceListPopup {
-                     showPlaceListPopup = false
-                 }
-             }
-         }
-         .padding(.bottom, 20)
-     ```
-     
-     - warning: This function is asynchronous and it's suggested that to encase it in a task block.
-     
-     */
-    func refreshPlaces() {
-        // TODO: - Fix an issue here with the data race condition for sending
-//        Task {
-//            retrievalStatus = .ongoing
-//            
-//            await retrievePlaces()
-//            
-//            if retrievalStatus == .failure {
-//                if let location = self.location,
-//                    let preCachedPlaces = mapService.retrievePlacesData(from: location.coordinate.latitude, and: location.coordinate.longitude) {
-//                    places = preCachedPlaces
-//                    retrievalStatus = .precached
-//                    setGroupedPlacesIfNeeded()
-//                }
-//            } else {
-//                setGroupedPlacesIfNeeded()
-//            }
-//            
-//            goToCurrentLocation()
-//        }
     }
 }

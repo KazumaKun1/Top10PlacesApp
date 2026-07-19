@@ -7,55 +7,30 @@
 
 import Foundation
 import CoreLocation
+import Combine
 
-/**
- 
- ```
- class MyClass: LocationManagerDelegate {
-     func didAuthenticationSuccessful() {
-        //Additional code here
-     }
-     
-     func didAuthenticationFailure() {
-        //Additional code here
-     }
-     
-     func didGetUpdatedLocation(location: CLLocation) {
-        //Additional code here
-     }
-     
-     func didFailGettingLocation() {
-        //Additional code here
-     }
- }
- ```
- 
- */
-
-protocol LocationManagerDelegate {
-    func didAuthenticationSuccessful()
-    func didAuthenticationFailure()
-    func didGetUpdatedLocation(location: CLLocation)
-    func didFailGettingLocation()
+enum LocationStreamError: Error {
+    case networkFailure
+    case noLocationFound
+    case denied
+    case unknown(Error)
 }
 
-/**
- This is a  class that contains a CLLocationManager instance to handle additional logic for the CLLocationManagerDelegate and separate the responsibility of retrieving the location.
- 
- ```
- let manager = LocationManager()
- ```
- 
- */
+protocol LocationManagerProtocol {
+    var locationPublisher: PassthroughSubject<CLLocation, Never> { get }
+    var permissionDeniedPublisher: CurrentValueSubject<Bool, Never> { get }
+    var errorPublisher: PassthroughSubject<LocationStreamError, Never> { get }
+}
 
-class LocationManager: NSObject, ObservableObject {
-    var delegate: LocationManagerDelegate?
-    
+class LocationManager: NSObject, LocationManagerProtocol, ObservableObject {
     private let manager = CLLocationManager()
+    
+    let locationPublisher = PassthroughSubject<CLLocation, Never>()
+    let permissionDeniedPublisher = CurrentValueSubject<Bool, Never>(false)
+    let errorPublisher = PassthroughSubject<LocationStreamError, Never>()
     
     override init() {
         super.init()
-        
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.distanceFilter = kCLDistanceFilterNone
         manager.delegate = self
@@ -65,26 +40,34 @@ class LocationManager: NSObject, ObservableObject {
 extension LocationManager: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
-            case .notDetermined, .restricted, .denied:
-                manager.requestWhenInUseAuthorization()
-                delegate?.didAuthenticationFailure()
-            case .authorizedAlways, .authorizedWhenInUse:
-                manager.startUpdatingLocation()
-                delegate?.didAuthenticationSuccessful()
-            default:
-                break
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .authorizedAlways, .authorizedWhenInUse:
+            manager.startUpdatingLocation()
+            permissionDeniedPublisher.send(false)
+        case .denied, .restricted:
+            permissionDeniedPublisher.send(true)
+        @unknown default:
+            break
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else {
+            errorPublisher.send(.noLocationFound)
             return
         }
     
-        self.delegate?.didGetUpdatedLocation(location: location)
+        locationPublisher.send(location)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.delegate?.didFailGettingLocation()
+        if let clError = error as? CLError {
+            switch clError.code {
+            case .denied: errorPublisher.send(.denied)
+            case .network: errorPublisher.send(.networkFailure)
+            default: errorPublisher.send(.unknown(error))
+            }
+        }
     }
 }
