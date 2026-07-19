@@ -13,7 +13,7 @@ struct Top10PlacesApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView(viewModel: RankingPlacesViewModel(mapService: MapService()))
         }
     }
 }

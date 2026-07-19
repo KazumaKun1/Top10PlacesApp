@@ -44,11 +44,12 @@ class RankingPlacesViewModel: ObservableObject {
                 self.location = location
                 self.retrievalStatus = .ongoing
             })
-            .flatMap { [mapService] location in
+            .map { [mapService] location in
                 mapService.getPlaces(near: location.coordinate)
                     .map { (LocationRetrievalState.success, $0) }
                     .catch { _ in Just((LocationRetrievalState.failure, [])) }
             }
+            .switchToLatest()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status, places in
                 guard let self else { return }

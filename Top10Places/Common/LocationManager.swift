@@ -44,6 +44,7 @@ extension LocationManager: CLLocationManagerDelegate {
             manager.requestWhenInUseAuthorization()
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
+            permissionDeniedPublisher.send(false)
         case .denied, .restricted:
             permissionDeniedPublisher.send(true)
         @unknown default:

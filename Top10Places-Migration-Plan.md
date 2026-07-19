@@ -164,7 +164,7 @@ Depends on Phases 1 and 2. (See "Phase 3 review notes" below — the first worki
 
 ## Phase 4 — Remove Core Data, no replacement
 
-Decided against migrating to SwiftData (tracked as a separate practice project instead — see note below). The original justification for a persistence layer no longer applies: Core Data existed to cache HERE API responses because HERE was a paid, rate-limited third-party API. `MKLocalSearch` (Phase 1) has no API key, no billing, and no rate limit for an app this size — the problem the cache solved doesn't exist anymore. Confirmed by inspection: as of Phase 1, `MapService.getPlaces` already never calls `saveRetrievedPlaces` — the caching path organically went dead the moment HERE was removed, without anything breaking.
+Decided against migrating to SwiftData (tracked as a separate practice project instead — see note below). The original justification for a persistence layer no longer applies: Core Data existed to cache HERE API responses because HERE was a paid, rate-limited third-party API. `MKLocalSearch` (Phase 1) requires no API key and no per-request billing — it may still throttle or slow down under heavy load, but that's not a concern given this app's request volume, so the problem the cache solved doesn't exist anymore. Confirmed by inspection: as of Phase 1, `MapService.getPlaces` already never calls `saveRetrievedPlaces` — the caching path organically went dead the moment HERE was removed, without anything breaking.
 
 **Caveat kept for the record:** `MKLocalSearch` still requires network access — it's not an offline API — so this does mean losing the "show last-known results when offline" behavior the original README listed as a feature. If that's wanted later, the right-sized fix is an in-memory (or `UserDefaults`) cache of the last successful `[Place]` array, not a full persistent store with entities/relationships. Not planned for now — revisit only if offline behavior becomes an actual complaint, not preemptively.
 
@@ -218,7 +218,7 @@ Independent of the other phases — can move first or last.
 
 Phase 0 → Phase 6 (tests, doesn't block anything) → Phase 1 + Phase 2 (networking + location, no dependencies on each other) → Phase 4 (Core Data removal, safe once Phase 1 confirms nothing else calls the caching methods) → Phase 3 (ViewModel, depends on 1+2) → Phase 5 (Coordinator + Map API, depends on 3).
 
-Actual progress so far: Phase 0 and Phase 1 are merged to `main`; Phase 3 has a first pass on the `migration/phase-3` branch with the gaps noted above still open; Phase 4 is newly re-scoped (removal, not SwiftData) and not yet started.
+Actual progress so far: Phase 0 and Phase 1 are merged to `main`; Phase 3 on the `migration/phase-3` branch now correctly assigns `location`, propagates success/failure `retrievalStatus`, and maps `getPlaces` errors to `.failure` instead of swallowing them — the remaining open gaps are `refreshPlaces()` (still unimplemented) and the permission-denied flag never resetting to `false` on re-authorization; Phase 4 is newly re-scoped (removal, not SwiftData) and not yet started.
 
 ## Deferred: category filter + text search (post-migration)
 

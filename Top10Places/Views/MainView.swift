@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct MainView: View {
-    @ObservedObject var viewModel = RankingPlacesViewModel()
+    @ObservedObject var viewModel: RankingPlacesViewModel
     
     @State var showNeedsPermissionAlert = false
     @State var showPinInfoPopup = false
